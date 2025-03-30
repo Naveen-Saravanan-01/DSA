@@ -1,1 +1,279 @@
-hi
+Largest Element in Array
+
+
+class Solution {
+    public static int largest(int[] arr) {
+        // code here
+        
+        int large=arr[0];
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]>large){
+                large=arr[i];
+            }
+        }
+        
+        return large;
+    }
+}
+
+-------------------------------------------------------
+
+Second Largest
+
+
+// User function Template for Java
+
+class Solution {
+    public int getSecondLargest(int[] arr) {
+        // Code Here
+        
+        int large=Integer.MIN_VALUE;
+        int sec_large=Integer.MIN_VALUE;
+        
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]>large){
+                sec_large=large;
+                large=arr[i];
+            }else if(arr[i]>sec_large && arr[i]!=large){
+                sec_large=arr[i];
+            }
+        }
+        
+        if(sec_large==large || sec_large==Integer.MIN_VALUE){
+            return -1;
+        }
+        
+        return sec_large;
+
+        
+    }
+}
+
+
+-------------------------------------------------------
+
+Check if Array Is Sorted and Rotated
+
+
+class Solution {
+    public boolean check(int[] nums) {
+        int count =0;
+       for(int i=0;i<nums.length;i++){
+        int next=(i+1)%nums.length;
+
+        if(nums[i]>nums[next]){
+            count++;
+        }
+       }
+       if(count<=1){
+        return true;
+       }else{
+        return false;
+       }
+    }
+}
+
+
+-------------------------------------------------------
+
+Remove Duplicates from Sorted Array
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+
+        int n=nums.length;
+        int i=0;
+
+
+        for(int j=1;j<n;j++){
+            if(nums[i]!=nums[j]){
+                i++;
+                nums[i]=nums[j];
+            }
+
+        }
+
+        return i+1;
+    }
+}
+
+
+-------------------------------------------------------
+
+
+Rotate Array(Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.)
+
+class Solution {
+    public void rotate(int[] arr, int k) {
+
+        int n=arr.length;
+        k=k%n;
+        reverse(arr,0,n-1-k);
+        reverse(arr,n-k,n-1);
+        reverse(arr,0,n-1);
+        
+    }
+
+    private static void reverse(int arr[],int start,int end){
+        int temp;
+        
+        while(start<end){
+            temp=arr[start];
+            arr[start]=arr[end];
+            arr[end]=temp;
+
+            start++;
+            end--;
+
+        }
+    }
+}
+
+
+-------------------------------------------------------
+
+
+Move Zeroes
+
+class Solution {
+    public void moveZeroes(int[] nums) {
+
+        int i=0;
+        for(int j=0;j<nums.length;j++){
+            if(nums[j]!=0){
+                nums[i]=nums[j];
+                i++;
+            }
+        }
+
+        for(int j=i;j<nums.length;j++){
+            nums[j]=0;
+        }
+        
+    }
+}
+
+
+-------------------------------------------------------
+
+
+Sorted Array Search
+
+
+class Solution {
+    static boolean searchInSorted(int arr[], int k) {
+        // Your code here
+        
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]==k){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+}
+
+
+-------------------------------------------------------
+
+
+Union of 2 Sorted with Duplicates
+
+class Solution {
+    // Function to return a list containing the union of the two arrays.
+    public static ArrayList<Integer> findUnion(int arr1[], int arr2[]) {
+        // add your code here
+        
+         Set<Integer> unionSet = new HashSet<>();
+
+        for (int num : arr1) {
+            unionSet.add(num);
+        }
+        for (int num : arr2) {
+            unionSet.add(num);
+        }
+
+        ArrayList<Integer> resultList = new ArrayList<>();
+        for(int num:unionSet){
+            resultList.add(num);
+        }
+        Collections.sort(resultList);
+
+        return resultList;
+    
+    }
+}
+
+
+-------------------------------------------------------
+
+
+Missing Number
+
+
+class Solution {
+    public int missingNumber(int[] nums) {
+
+        int n=nums.length;
+        int totalSum=(n*(n+1))/2;
+        int actualSum=0;
+
+        for(int i=0;i<n;i++){
+            actualSum+=nums[i];
+        }
+
+        int missValue=totalSum-actualSum;
+
+        return missValue;
+        
+    }
+}
+
+
+-------------------------------------------------------
+
+
+Max Consecutive Ones
+
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+
+
+        int current=0;
+        int max=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==1){
+                current++;
+                max=Math.max(current,max);
+            }
+            else{
+                current=0;
+            }
+        }
+        return max;
+        
+    }
+}
+
+
+
+-------------------------------------------------------
+
+
+Single Number
+
+
+class Solution {
+    public int singleNumber(int[] nums) {
+        int result = 0;
+        for (int num : nums) {
+            result ^= num;
+        }
+        return result;
+    }
+}
+
+
+
+-------------------------------------------------------
