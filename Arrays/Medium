@@ -1,0 +1,500 @@
+Two Sum
+
+
+class Solution {
+    public int[] twoSum(int[] arr, int target) {
+
+        for(int i=0;i<arr.length;i++){
+            for(int j=i+1;j<arr.length;j++){
+                if(arr[i]+arr[j]==target){
+                    return new int[] {i,j};
+                }
+            }
+        }
+        return new int[0];
+
+    }
+}
+
+
+----------------------------------------------------
+
+
+Sort Colors
+
+
+class Solution {
+    public void sortColors(int[] nums) {
+
+        int low=0;
+        int mid=0;
+        int high=nums.length-1;
+        int temp;
+
+        for(int i=0;i<nums.length;i++){
+            if(nums[mid]==0){
+                temp=nums[mid];
+                nums[mid]=nums[low];
+                nums[low]=temp;
+
+                low++;
+                mid++;
+            }else if (nums[mid] == 1) {
+                mid++;
+            }
+            else {
+                 temp = nums[mid];
+                nums[mid] = nums[high];
+                nums[high] = temp;
+                
+                high--;
+            }
+        }
+        
+    }
+}
+
+
+----------------------------------------------------
+
+
+Majority Element
+
+
+class Solution {
+    public int majorityElement(int[] nums) {
+
+        int key=0;
+        int count =0;
+
+        for(int i=0;i<nums.length;i++){
+            if(count==0){
+                key=nums[i];
+            }
+            if(nums[i]==key){
+                count++;
+            }
+            else{
+                count--;
+            }
+        }
+
+        return key;
+        
+    }
+}
+
+
+----------------------------------------------------
+
+
+Maximum Subarray
+
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+
+        int n=nums.length;
+        int max=Integer.MIN_VALUE;
+        int sum=0;
+
+        for(int i=0;i<n;i++){
+            sum+=nums[i];
+            if(nums[i]>max){
+                max=nums[i];
+            }
+
+            if(sum>max){
+                max=sum;
+            }
+
+            if(sum<0){
+                sum=0;
+            }
+
+        }
+
+        return max;
+        
+    }
+}
+
+
+----------------------------------------------------
+
+
+Max Score from Subarray Mins(chatgpt)...
+
+
+class Solution {
+    public int pairWithMaxSum(int arr[]) {
+        int n = arr.length;
+        int maxSum = 0;
+
+        // Iterate through all possible subarrays
+        for (int i = 0; i < n; i++) {
+            int smallest = Integer.MAX_VALUE;
+            int secondSmallest = Integer.MAX_VALUE;
+
+            // Check all subarrays starting from index i
+            for (int j = i; j < n; j++) {
+                // Update smallest and second smallest elements
+                if (arr[j] < smallest) {
+                    secondSmallest = smallest;
+                    smallest = arr[j];
+                } else if (arr[j] < secondSmallest) {
+                    secondSmallest = arr[j];
+                }
+
+                // Update maxSum if second smallest is valid
+                if (secondSmallest != Integer.MAX_VALUE) {
+                    maxSum = Math.max(maxSum, smallest + secondSmallest);
+                }
+            }
+        }
+        return maxSum;
+    }
+}
+
+
+----------------------------------------------------
+
+
+Best Time to Buy and Sell Stock
+
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int minPrice=Integer.MAX_VALUE;
+        int maxProfit=0;
+
+        for(int i=0;i<prices.length;i++){
+            if(prices[i]<minPrice){
+                minPrice=prices[i];
+            }else{
+                int profit=prices[i]-minPrice;
+
+                if(profit>maxProfit){
+                    maxProfit=profit;
+                }
+            }
+        }
+        return maxProfit;
+    }
+}
+
+
+----------------------------------------------------
+
+
+ Rearrange Array Elements by Sign
+
+
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+
+        List <Integer> pos=new ArrayList<>();
+        List <Integer> neg=new ArrayList<>();
+
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]>0){
+                pos.add(nums[i]);
+            }else{
+                neg.add(nums[i]);
+            }
+        }
+
+        
+        int[] res = new int[nums.length];
+        int p = 0, n = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (i % 2 == 0) {
+                res[i] = pos.get(p++);
+            } else {
+                res[i] = neg.get(n++);
+            }
+        }
+
+        return res;
+
+        
+    }
+}
+
+
+----------------------------------------------------
+
+
+Next Permutation
+
+
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int n=nums.length;
+        int ind=-1;
+
+        for(int i=n-2;i>=0;i--){
+            if(nums[i]<nums[i+1]){
+                ind=i;
+                break;
+                
+            }
+        }
+
+        if(ind==-1){
+            int start=0,end=n-1;
+            while(start<end){
+
+                int temp=nums[start];
+                nums[start]=nums[end];
+                nums[end]=temp;
+
+                start++;
+                end--;
+
+
+            }
+
+            return;
+
+        }else{
+            int j=n-1;
+
+            for(int i=j;i>ind;i--){
+                if(nums[i]>nums[ind]){
+
+                    j=i;
+                    break;
+                }
+            }
+
+                int temp=nums[ind];
+                nums[ind]=nums[j];
+                nums[j]=temp;
+
+                int start=ind+1,end=n-1;
+
+                while(start<end){
+                    temp=nums[start];
+                    nums[start]=nums[end];
+                    nums[end]=temp;
+
+                    start++;
+                    end--;
+                
+            }
+        }
+
+        
+        
+    }
+}
+
+
+----------------------------------------------------
+
+
+Array Leaders
+
+
+
+class Solution {
+    static ArrayList<Integer> leaders(int arr[]) {
+        // code here
+        
+        ArrayList<Integer> ans=new ArrayList<>();
+        int n=arr.length;
+        int a=arr[n-1];
+        ans.add(a);
+        
+        for(int i=n-2;i>=0;i--){
+            if(arr[i]>=a){
+                ans.add(0,arr[i]);
+                a=arr[i];
+            }
+        }
+        
+        return ans;
+    }
+}
+
+
+----------------------------------------------------
+
+
+Longest Consecutive Sequence
+
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+
+        HashSet <Integer> set=new HashSet<>();
+
+        int longest=0;
+
+        for(int num:nums){
+            set.add(num);
+        }
+
+        for(int num:set){
+            if(!(set.contains(num -1)))
+            {
+                int count=1;
+                int current=num;
+                while(set.contains(current+1)){
+
+                    current=current+1;
+                    count++;
+                }
+
+                 longest=Math.max(count,longest);
+            }
+        }
+
+        return longest;
+
+        
+    }
+}
+
+
+----------------------------------------------------
+
+
+Set Matrix Zeroes
+
+
+class Solution {
+    public void setZeroes(int[][] matrix) {
+         boolean firstRowZero = false;
+        boolean firstColZero = false;
+        
+        // Check if the first row needs to be set to zero
+        for (int j = 0; j < matrix[0].length; j++) {
+            if (matrix[0][j] == 0) {
+                firstRowZero = true;
+                break;
+            }
+        }
+        
+        // Check if the first column needs to be set to zero
+        for (int i = 0; i < matrix.length; i++) {
+            if (matrix[i][0] == 0) {
+                firstColZero = true;
+                break;
+            }
+        }
+        
+        // Use the first row and first column to mark zeroes
+        for (int i = 1; i < matrix.length; i++) {
+            for (int j = 1; j < matrix[0].length; j++) {
+                if (matrix[i][j] == 0) {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+        
+        // Set rows to zero based on values in the first column
+        for (int i = 1; i < matrix.length; i++) {
+            if (matrix[i][0] == 0) {
+                for (int j = 1; j < matrix[0].length; j++) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        
+        // Set columns to zero based on values in the first row
+        for (int j = 1; j < matrix[0].length; j++) {
+            if (matrix[0][j] == 0) {
+                for (int i = 1; i < matrix.length; i++) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        
+        // Set first row to zero if needed
+        if (firstRowZero) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                matrix[0][j] = 0;
+            }
+        }
+        
+        // Set first column to zero if needed
+        if (firstColZero) {
+            for (int i = 0; i < matrix.length; i++) {
+                matrix[i][0] = 0;
+            }
+        }
+    }
+}
+
+
+----------------------------------------------------
+
+
+Rotate Image
+
+
+class Solution {
+    public void rotate(int[][] matrix) {
+
+        int n = matrix.length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            int start = 0, end = n - 1;
+            while (start < end) {
+                int temp = matrix[i][start];
+                matrix[i][start] = matrix[i][end];
+                matrix[i][end] = temp;
+                start++;
+                end--;
+            }
+        }
+        
+    }
+}
+
+
+----------------------------------------------------
+
+
+Pascal's Triangle
+
+
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+
+        List<List<Integer>> result=new ArrayList<>();
+
+        for(int i=0;i<numRows;i++){
+
+            List<Integer> row = new ArrayList<>();
+            int num=1;
+            for(int j=0;j<=i;j++){
+                row.add(num);
+                num=num*(i-j)/(j+1);
+            }
+
+            result.add(row);
+        }
+
+        return result;
+        
+    }
+}
+
+
+----------------------------------------------------
+
+
+
