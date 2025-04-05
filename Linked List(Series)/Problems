@@ -269,6 +269,223 @@ class Solution {
 -------------------------------------------------------
 
 
+Remove Nth Node From End of List
+
+
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+
+        ListNode fast=head;
+        ListNode small=head;
+
+        if(head==null || head.next==null)
+        return null;
+
+        for(int i=0;i<n;i++){
+            fast=fast.next;
+        }
+
+        if(fast==null){
+            return head.next;
+        }
+
+
+        while(fast.next!=null){
+            small=small.next;
+            fast=fast.next;
+        }
+
+        small.next=small.next.next;
+        return head;
+        
+    }
+}
+
+
+
+-------------------------------------------------------
+
+
+Reverse Linked List
+
+
+class Solution {
+    public ListNode reverseList(ListNode head) {
+
+        ListNode temp=head;
+        ListNode prev=null;
+
+        ListNode front;
+
+        while(temp!=null){
+            front =temp.next;
+            temp.next=prev;
+            prev=temp;
+            temp=front;
+
+        }
+
+        return prev;
+        
+    }
+}
+
+
+
+-------------------------------------------------------
+
+
+Palindrome Linked List
+
+
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+
+        ListNode slow=head,fast=head;
+
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+
+        ListNode secondHalf=reverse(slow);
+
+        ListNode temp=secondHalf;
+
+        while(temp!=null){
+            if(head.val != temp.val){
+                return false;
+            }
+
+            head=head.next;
+            temp=temp.next;
+        }
+
+        reverse(secondHalf);
+        return true;
+        
+    }
+
+
+    private static ListNode reverse(ListNode secondHead){
+
+        ListNode temp=secondHead;
+        ListNode prev=null;
+        ListNode front=null;
+        while(temp!=null){
+
+            front=temp.next;
+            temp.next=prev;
+            prev=temp;
+            temp=front;
+
+        }
+
+        return prev;
+    }
+}
+
+
+
+-------------------------------------------------------
+
+
+Add 1 to a Linked List Number
+
+
+
+
+/*
+class Node{
+    int data;
+    Node next;
+
+    Node(int x){
+        data = x;
+        next = null;
+    }
+}
+*/
+
+class Solution {
+    
+    private Node reverse(Node head){
+        Node prev=null,next=head,temp=head;
+        
+        while(temp!=null){
+            next=temp.next;
+            temp.next=prev;
+            prev=temp;
+            temp=next;
+        }
+        
+        return prev;
+    }
+    
+    
+    
+    public Node addOne(Node head) {
+        // code here.
+        head=reverse(head);
+        Node temp=head;
+        int carry=1;
+        int current;
+        Node prev=null;
+        while(temp!=null){
+            
+            current=temp.data+carry;
+            temp.data=current%10;
+            carry=current/10;
+            prev=temp;
+            temp=temp.next;
+            
+        }
+        
+        if(carry>0){
+            prev.next=new Node(carry);
+        }
+        
+        return reverse(head);
+    }
+}
+
+
+
+-------------------------------------------------------
+
+
+ Intersection of Two Linked Lists
+
+
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode firsthead=headA;
+        ListNode secondHead=headB;
+        ListNode temp1=headA,temp2=headB;
+
+        while(temp1 != temp2){
+            temp1=temp1.next;
+            temp2=temp2.next;
+
+            if(temp1==temp2)
+            return temp1;
+
+            if(temp1==null)
+            temp1=secondHead;
+
+            if(temp2==null)
+            temp2=firsthead;
+
+        } 
+
+        return temp1;
+    }
+}
+
+
+
+-------------------------------------------------------
+
 
 
 
