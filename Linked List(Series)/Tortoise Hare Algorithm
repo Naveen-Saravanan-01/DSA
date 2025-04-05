@@ -1,0 +1,153 @@
+Middle of the Linked List
+
+
+class Solution {
+    public ListNode middleNode(ListNode head) {
+
+        ListNode slow=head,fast=head;
+
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+
+        }
+
+        return slow;
+        
+    }
+}
+
+
+--------------------------------------------------------
+
+
+Detect Linked List Cycle
+
+
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+
+        ListNode fast=head,slow=head;
+
+        while(fast!=null && fast.next!=null ){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(fast==slow){
+                return true;
+            }
+        }
+        return false;
+
+        
+    }
+}
+
+
+--------------------------------------------------------
+
+
+Linked List Cycle II(Starting point of LL loop)
+
+
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+
+        ListNode slow=head,fast=head;
+        while(fast != null && fast.next != null){
+
+            slow=slow.next;
+            fast=fast.next.next;
+
+            if(slow==fast){
+                slow=head;
+
+                while(slow!=fast){
+                    slow=slow.next;
+                    fast=fast.next;
+                }
+
+                return slow;
+            }
+
+        }
+        return null;
+    }
+}
+
+
+--------------------------------------------------------
+
+
+Find length of Loop
+
+
+class Solution {
+    // Function to find the length of a loop in the linked list.
+    public int countNodesinLoop(Node head) {
+        // Add your code here.
+        
+        Node slow=head,fast=head;
+        Node temp=head;
+        
+        if(temp==null || temp.next==null)
+        return 0;
+        
+        while(fast!=null && fast.next!=null){
+            
+            slow=slow.next;
+            fast=fast.next.next;
+            
+            if(slow==fast){
+                return countLength(slow,fast);
+            }
+            
+        }
+        
+        return 0;
+    }
+    
+    private int countLength(Node slow,Node fast){
+        int cnt=1;
+        fast=fast.next;
+        
+        while(slow!=fast){
+            cnt++;
+            fast=fast.next;
+        }
+        
+        return cnt;
+    }
+}
+
+
+--------------------------------------------------------
+
+
+Delete the Middle Node of a Linked List
+
+
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+
+        ListNode slow=head,fast=head,prev=null;
+
+        if(head==null || head.next==null)
+        return null;
+
+        while(fast!=null && fast.next!=null){
+            prev=slow;
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+
+        prev.next=prev.next.next;
+
+        return head;
+    }
+}
+
+
+
+
+--------------------------------------------------------
+
