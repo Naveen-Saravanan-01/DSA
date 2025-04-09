@@ -1,0 +1,112 @@
+Array to Linked List
+
+
+class Solution {
+    static Node constructLL(int arr[]) {
+        // code here
+        Node head=new Node(arr[0]);
+        Node mover=head;
+        for(int i=1;i<arr.length;i++){
+            Node temp=new Node(arr[i]);
+            mover.next=temp;
+            mover=temp;
+        }
+        return head;
+    }
+}
+
+
+
+-----------------------------------------------------------
+
+
+Linked List Insertion At End
+
+
+class Solution {
+    // Function to insert a node at the end of the linked list.
+    Node insertAtEnd(Node head, int x) {
+        // code here
+        
+        if(head==null)
+        return new Node(x);
+        
+        Node temp=head;
+        
+        while(temp.next!=null)
+        {
+            temp=temp.next;
+        }
+        
+        Node n=new Node(x);
+        temp.next=n;
+        
+        return head;
+    }
+}
+
+
+
+-----------------------------------------------------------
+
+
+Delete Node in a Linked List
+
+
+class Solution {
+    public void deleteNode(ListNode node) {
+        if(node==null || node.next!=null)
+        node.val = node.next.val; 
+        node.next = node.next.next;
+    }
+}
+
+
+
+-----------------------------------------------------------
+
+
+Count Linked List Nodes
+
+
+class Solution {
+    // Function to count nodes of a linked list.
+    public int getCount(Node head) {
+        // code here
+        Node temp=head;
+        int cnt=0;
+        while(temp!=null){
+            temp=temp.next;
+            cnt++;
+        }
+        return cnt;
+    }
+}
+
+
+
+-----------------------------------------------------------
+
+
+Search in Linked List
+
+
+class Solution {
+    static boolean searchKey(int n, Node head, int key) {
+        // Code here
+        Node temp=head;
+        boolean ans=false;
+        while(temp!=null){
+            if(temp.data==key)
+            ans=true;
+            
+            
+            
+            temp=temp.next;
+        }
+        return ans;
+    }
+}
+
+
+
