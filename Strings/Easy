@@ -1,0 +1,231 @@
+Remove Outermost Parentheses
+
+
+class Solution {
+    public String removeOuterParentheses(String s) {
+
+        StringBuilder ans=new StringBuilder();
+        int cnt=0;
+
+        for(char ch:s.toCharArray()){
+
+            if(ch=='(')
+            {                                                 
+                if(cnt>0){
+                    ans.append(ch);
+                }
+                
+                cnt++;
+
+            }else{
+
+                cnt--;
+                if(cnt>0){
+                    ans.append(ch);
+                }
+
+            }
+
+
+        }
+
+        return ans.toString();
+        
+    }
+}
+
+
+
+----------------------------------------------------------------------
+
+
+Reverse Words in a String
+
+
+
+class Solution {
+    public String reverseWords(String s) {
+        String words[]=s.trim().split("\\s+");
+        StringBuilder sb=new StringBuilder();
+
+        for(int i=words.length-1;i>=0;i--){
+            sb.append(words[i]);
+
+            if(i!=0)
+            sb.append(" ");
+
+        }
+
+        return sb.toString();
+    }
+}
+
+
+
+----------------------------------------------------------------------
+
+
+
+Largest Odd Number in String
+
+
+class Solution {
+    public String largestOddNumber(String num) {
+        for(int i=num.length()-1;i>=0;i--){
+            if(num.charAt(i)%2!=0){
+                return num.substring(0,i+1);
+            }
+        }
+
+        return "";
+    }
+}
+
+
+
+----------------------------------------------------------------------
+
+
+
+Longest Common Prefix
+
+
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+
+        String prefix=strs[0];
+        for( int i=1;i<strs.length;i++){
+
+        
+        while(!strs[i].startsWith(prefix)){
+
+            prefix=prefix.substring(0,prefix.length()-1);
+
+            if(prefix.isEmpty())
+            return "";
+        
+
+        }
+    }
+            return prefix;
+
+}
+
+}
+
+
+
+----------------------------------------------------------------------
+
+
+
+Isomorphic Strings
+
+
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+
+        if(s.length()!=t.length())
+        return false;
+
+        HashMap <Character,Character > map_s=new HashMap<>();
+        HashMap<Character,Character > map_t=new HashMap<>();
+
+
+
+        char[] arr1=s.toCharArray();
+        char[] arr2=t.toCharArray();
+
+        for(int i=0;i<arr1.length;i++){
+
+            char charS=arr1[i];
+            char charT=arr2[i];
+
+            if(!map_s.containsKey(charS)){
+
+                map_s.put(charS,charT);
+
+            }else{
+
+                if(map_s.get(charS)!=charT)
+                return false;
+            }
+
+
+            if(!map_t.containsKey(charT)){
+
+                map_t.put(charT,charS);
+
+            }else{
+
+                if(map_t.get(charT)!=charS)
+                return false;
+            }
+
+        }
+
+        return true;
+
+    }
+}
+
+
+
+----------------------------------------------------------------------
+
+
+
+Rotate String(check whether one string is a rotation of another
+)
+
+
+class Solution {
+    public boolean rotateString(String s, String goal) {
+
+        if (s.length() != goal.length()) return false;
+
+        String combined = s + s;
+        return combined.contains(goal);
+        
+    }
+}
+
+
+
+----------------------------------------------------------------------
+
+
+
+Valid Anagram
+
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        
+        int cnt[]=new int[26];
+
+        char[] arr1=s.toCharArray();
+        char[] arr2=t.toCharArray();
+
+        for(char ch:s.toCharArray()){
+            cnt[ch-'a']++;
+        }
+        for(char ch:t.toCharArray()){
+            cnt[ch-'a']--;
+        }
+
+        for(int num:cnt){
+            if(num!=0){
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+
+
+----------------------------------------------------------------------
+
+
