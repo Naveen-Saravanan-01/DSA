@@ -29,6 +29,79 @@ class Solution {
 -------------------------------------------------------
 
 
+Doubly linked list Insertion at given position
+
+
+class Solution {
+    // Function to insert a new node at given position in doubly linked list.
+    Node addNode(Node head, int p, int x) {
+        // Your code here
+        Node temp=head;
+        
+        for(int i=0;i<p;i++){
+            temp=temp.next;
+        }
+        Node newNode=new Node(x);
+        
+        newNode.next=temp.next;
+        temp.next=newNode;
+        newNode.prev=temp;
+        
+        if(newNode.next!=null){
+            newNode.next.prev=newNode;
+        }
+
+        
+        return head;
+    }
+}
+
+
+-------------------------------------------------------
+
+
+
+Delete in a Doubly Linked List
+
+
+
+*/
+class Solution {
+    public Node deleteNode(Node head, int x) {
+        // code here
+        
+        Node temp=head;
+        
+        if(x==1){
+            head.prev=null;
+            head=head.next;
+
+        }
+        
+        
+        for(int i=1;i<x;i++){
+            temp=temp.next;
+        }
+        
+        if(temp.next!=null){
+        temp.next.prev=temp.prev;
+        }
+        
+        if(temp.prev!=null){
+            temp.prev.next=temp.next;
+        }
+        
+        return head;
+    }
+}
+
+
+
+-------------------------------------------------------
+
+
+
+
 Reverse a Doubly Linked List
 
 
