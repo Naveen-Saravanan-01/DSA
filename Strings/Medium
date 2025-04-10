@@ -181,3 +181,93 @@ class Solution {
 
 -----------------------------------------------------------------
 
+
+
+String to Integer (atoi)
+
+
+class Solution {
+    public int myAtoi(String s) {
+
+        s=s.trim();
+        int i=0;
+        int n=s.length();
+
+        if (n == 0) return 0;
+
+        //sign
+
+        int sign=1;
+        if(s.charAt(i)=='+' || s.charAt(i)=='-'){
+        sign=s.charAt(i)=='-'?-1:1;
+        i++;
+        }
+
+        //conversion
+        int result=0;
+
+        while(i<n && Character.isDigit(s.charAt(i))){
+
+            int digit = s.charAt(i) - '0';
+
+           if(result > (Integer.MAX_VALUE - digit) / 10) {
+                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+           }
+            result = result * 10 + digit;
+            i++;
+        
+        }
+
+        return result * sign;
+
+    }
+}
+
+
+
+-----------------------------------------------------------------
+
+
+
+Substrings with K Distinct(exactly K)
+
+
+
+class Solution {
+    int countSubstr(String s, int k) {
+        // your code here
+        return atMostKDistinct(s, k) - atMostKDistinct(s, k - 1);
+
+    }
+    
+    public static int atMostKDistinct(String s, int k) {
+        int left = 0, count = 0;
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int right = 0; right < s.length(); right++) {
+            char c = s.charAt(right);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+    
+            while (map.size() > k) {
+                char leftChar = s.charAt(left);
+                map.put(leftChar, map. get(leftChar) - 1);
+                if (map.get(leftChar) == 0) {
+                    map.remove(leftChar);
+                }
+                left++;
+            }
+    
+            count = count+right - left + 1;
+        }
+
+    return count;
+    }
+}
+
+
+
+
+-----------------------------------------------------------------
+
+
+
