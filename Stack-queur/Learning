@@ -1,0 +1,414 @@
+Implement stack using array(GFG)
+
+
+
+
+class MyStack {
+    private int[] arr;
+    private int top;
+
+    public MyStack() {
+        arr = new int[1000];
+        top = -1;
+    }
+
+    public void push(int x) {
+        // Your Code
+        
+        top++;
+        arr[top]=x;
+    }
+
+    public int pop() {
+        // Your Code
+        
+        if(top==-1)
+        return -1;
+        
+        int temp=arr[top];
+        top--;
+        return temp;
+    }
+}
+
+
+
+
+
+
+
+
+
+---------------------------------------------------
+
+
+
+
+Queue Using Array
+
+
+
+
+class MyQueue {
+
+    int front, rear;
+	int arr[] = new int[100005];
+
+    MyQueue()
+	{
+		front=0;
+		rear=0;
+	}
+	
+	//Function to push an element x in a queue.
+	void push(int x)
+	{
+	    // Your code here
+	    arr[rear]=x;
+	    rear++;
+	} 
+
+    //Function to pop an element from queue and return that element.
+	int pop()
+	{
+		// Your code here
+		if(front==rear)
+		return -1;
+		
+		int temp=arr[front];
+		front++;
+		return temp;
+	} 
+}
+
+
+
+--------------------------------------------------------------------
+
+
+
+Stack using Linked List
+
+
+
+
+
+
+class MyStack {
+    // class StackNode {
+    //     int data;
+    //     StackNode next;
+    //     StackNode(int a) {
+    //         data = a;
+    //         next = null;
+    //     }
+    // }
+    StackNode top;
+
+    // Function to push an integer into the stack.
+    void push(int a) {
+        // Add your code here
+        
+        StackNode newNode=new StackNode(a);
+        newNode.next=top;
+        top=newNode;
+    }
+
+    // Function to remove an item from top of the stack.
+    int pop() {
+        // Add your code here
+        if(top==null)
+        return -1;
+        int temp=top.data;
+        top=top.next;
+        return temp;
+        
+        
+    }
+}
+
+
+
+------------------------------------------------------------
+
+
+
+Queue using Linked List
+
+
+
+
+
+
+/*The structure of the node of the queue is
+class QueueNode
+{
+	int data;
+	QueueNode next;
+	QueueNode(int a)
+	{
+	    data = a;
+	    next = null;
+	}
+}*/
+
+class MyQueue
+{
+    QueueNode front, rear;
+    
+    //Function to push an element into the queue.
+	void push(int a)
+	{
+        // Your code here
+        QueueNode newNode=new QueueNode(a);
+        if(rear==null){
+            front=rear=newNode;
+        }else{
+        
+        rear.next=newNode;
+        rear=newNode;
+        
+        }
+	}
+	
+    //Function to pop front element from the queue.
+	int pop()
+	{
+        // Your code here
+        
+        if(front==null)
+        return -1;
+        
+        int value=front.data;
+        front=front.next;
+        
+        if(front==null){
+            rear=null;
+        }
+
+         return value;
+	}
+}
+
+
+
+
+-----------------------------------------------------------------
+
+
+
+Implement Stack using Queues
+
+
+
+class MyStack {
+
+    public MyStack() {
+    }
+
+    Queue<Integer> q = new LinkedList<>();
+
+    
+    public void push(int x) {
+        q.add(x);
+        int size=q.size();
+
+        for(int i=1;i<size;i++){
+            int temp=q.remove();
+            q.add(temp);
+        }
+    }
+    
+    public int pop() {
+
+        return q.remove();
+        
+    }
+    
+    public int top() {
+        return q.peek();
+    }
+    
+    public boolean empty() {
+        
+        if(q.isEmpty())
+        return true;
+        else
+        return false;
+        
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
+View less
+
+
+
+
+-------------------------------------------------------------
+
+
+
+Implement Queue using Stacks
+
+
+
+
+class MyQueue {
+
+    private Stack<Integer> inStack;
+    private Stack<Integer> outStack;
+
+    public MyQueue() {
+        
+        inStack=new Stack<>();
+        outStack=new Stack<>();
+    }
+    
+    private void shift(){
+
+        if(outStack.isEmpty()){
+
+           while (!inStack.isEmpty()) {
+                outStack.push(inStack.pop());
+            }
+
+        }
+    }
+
+
+    
+    public void push(int x) {
+        inStack.push(x);
+
+        shift();
+    }
+    
+    public int pop() {
+        shift();
+        return outStack.pop();
+    }
+    
+    public int peek() {
+        shift();
+        return outStack.peek();
+    }
+    
+    public boolean empty() {
+        return inStack.isEmpty() && outStack.isEmpty();    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
+View less
+
+
+
+-----------------------------------------------------------
+
+
+
+
+Valid Parentheses
+
+
+
+class Solution {
+    public boolean isValid(String s) {
+        Stack <Character> st=new Stack<>();
+        for(char ch:s.toCharArray()){
+            if(ch=='(' || ch=='[' || ch=='{'){
+                st.push(ch);
+            }else{
+
+                if(st.isEmpty())
+                return false;
+
+                char top=st.pop();
+
+                if((ch==')' && top!='(') || (ch==']' && top!='[') || (ch=='}' && top!='{')){        
+                    return false;
+                }
+            }
+        }
+
+        return st.isEmpty();
+    }
+}
+
+
+
+
+--------------------------------------------------------
+
+
+
+
+Min Stack
+
+
+
+class MinStack {
+
+    Stack<Integer> mainStack;
+    Stack<Integer> minStack;
+
+    public MinStack() {
+        mainStack=new Stack<>();
+        minStack=new Stack<>();
+    }
+    
+    public void push(int val) {
+        mainStack.push(val);
+
+
+        if(minStack.isEmpty() || val<=minStack.peek() ){
+
+            minStack.push(val);
+
+        }
+    }
+    
+    public void pop() {
+        
+        int removed=mainStack.pop();
+        if(removed==minStack.peek()){
+            minStack.pop();
+        }
+    }
+    
+    public int top() {
+        return mainStack.peek();
+    }
+    
+    public int getMin() {
+        return minStack.peek();
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(val);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
+
+
+
+
+------------------------------------------------
